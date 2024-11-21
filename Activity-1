@@ -1,13 +1,11 @@
 #include<iostream>
 using namespace std;
  
-int main()
+
+int l;
+
+void max_num(int arr[])
 {
-    int arr[5]={10,15,1,0,15};
-
-
-    // Greater
-
     int l,index_l;
 
     if (arr[0]>arr[1])
@@ -25,16 +23,15 @@ int main()
         {
             l=arr[j];
             index_l=j;
-            // cout<<"l["<<j<< l<<endl;
         }
     }
     cout<<"l="<<l<<endl;
+}
 
 
-    //Small
-
+void min_num(int arr[])
+{
     int s,index_s;
-    bool x;
 
     if (arr[0]==0 && arr[1]==0)
     {
@@ -72,7 +69,6 @@ int main()
         if ((arr[0]<arr[1]))
         {
             s=arr[0];
-            // cout<<"hiiiii";
         }
         else
         {
@@ -86,14 +82,25 @@ int main()
                 s=arr[i];
                 index_s=i;
             }
-            // cout<<"i="<<i<<endl;
         }
     }
     
+    cout<<"s="<<s<<endl;
+}
 
+int main()
+{
+    int arr[5]={2,18,1,0,15};
+
+
+    // Greater
+
+    max_num(arr);
+    min_num(arr);
+
+    //Small
 
     
-    cout<<"s=="<<s<<endl;
 
  
  return 0;
