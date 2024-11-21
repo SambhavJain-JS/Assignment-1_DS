@@ -1,53 +1,89 @@
 #include<iostream>
 using namespace std;
-
+ 
 int main()
 {
-    int arr[5] = {0, 14, 15, 0, 15};
+    int arr[5]={8,1,12,2,15};
 
-    int s, index_s;
-    if ((arr[0] < arr[1]))
+
+    // Greater
+
+    int l,index_l;
+
+    if (arr[0]>arr[1])
     {
-        s = arr[0];
-        cout << s;
+        l=arr[0];
     }
     else
     {
-        s = arr[1];
-    }
-
-    for (int i = 1; i < 5; i++)
-    {
-        if ((arr[i] < s) && (arr[i] != 0))
-        {
-            s = arr[i];
-            index_s = i;
-            cout << "000";
-        }
-    }
-
-    cout << "s=" << s << endl;
-
-    int l, index_l;
-
-    if (arr[0] > arr[1])
-    {
-        l = arr[0];
-    }
-    else
-    {
-        l = arr[1];
+        l=arr[1];
     }
 
     for (int j = 2; j < 5; j++)
     {
-        if (arr[j] > l)
+        if (arr[j]>l)
         {
-            l = arr[j];
-            index_l = j;
+            l=arr[j];
+            index_l=j;
+            // cout<<"l["<<j<< l<<endl;
+        }
+    }
+    cout<<"l="<<l<<endl;
+
+
+    //Small
+
+    int s,index_s;
+    bool x;
+
+    if (arr[0]==0 && arr[1]==0)
+    {
+        s=l;
+
+        for (int i = 2; i < 5; i++)
+        {
+            if ((arr[i]<s)&&(arr[i]!=0))
+            {
+                s=arr[i];
+                index_s=i;
+            }
         }
     }
 
-    cout << "l=" << l;
-    return 0;
+    else if (arr[0]==0 || arr[1]==0)
+    {
+        if (arr[0] !=0)
+        {
+            s=arr[0];
+
+            for (int i = 1; i < 5; i++)
+            {
+                if ((arr[i]<s)&&(arr[i]!=0))
+                {
+                    s=arr[i];
+                    index_s=i;
+                }
+            }
+        }                                                  
+        else if (arr[1] !=0)
+        {
+            s=arr[1];
+            for (int i = 1; i < 5; i++)
+            {
+                if ((arr[i]<s)&&(arr[i]!=0))
+                {
+                    s=arr[i];
+                    index_s=i;
+                }
+            }
+            
+        }
+    }
+
+
+    
+    cout<<"s=="<<s<<endl;
+
+ 
+ return 0;
 }
