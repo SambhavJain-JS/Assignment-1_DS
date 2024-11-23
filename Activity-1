@@ -2,11 +2,10 @@
 using namespace std;
  
 
+int l, s, m, index_s;
 
-
-int max_num(int arr[],int size)
+void max_num(int arr[],int size)
 {
-    int l;
     if (arr[0]>arr[1])
     {
         l=arr[0];
@@ -23,23 +22,21 @@ int max_num(int arr[],int size)
             l=arr[j];
         }
     }
-    // cout<<"l="<<l<<endl;
-    return l;
+    cout<<"l="<<l<<endl;
 }
 
-int min_num(int arr[],int size,int l, int index_s)
+void min_num(int arr[],int size)
 {
-    int s;
+    s=l;
     for (int i = 0; i < size; i++)
     {
-        if ((arr[i]<=l)&&(arr[i]!=0))
+        if ((arr[i]<=s)&&(arr[i]!=0))
         {
             s=arr[i];
             index_s=i;
         }
     }
     cout<<"s="<<s<<endl;
-    return 0;
 }
 
 void print_array(int arr[],int size)
@@ -51,16 +48,14 @@ void print_array(int arr[],int size)
     cout<<endl;
 }
 
-int modulus_q(int l,int s)
+void modulus_q()
 {
-    return l%s;
-    // int m=l%s;
-    // cout<<"Modulus="<<m;
+    m=l%s;
+    cout<<"Modulus="<<m;
 }
 
 int main()
 {
-    int l, s, m, index_s;
     int size;
     cout<<"Numberof Elements: ";
     cin>>size;
@@ -80,8 +75,8 @@ int main()
     for (int i = 0; i < size; i++)
     {
         max_num(arr,size);
-        min_num(arr,size,l, index_s);
-        modulus_q(l,s);
+        min_num(arr,size);
+        modulus_q();
         cout<<endl;
         arr[index_s]=0;
         cout<<"Current Array:";
