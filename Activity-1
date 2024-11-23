@@ -2,12 +2,11 @@
 using namespace std;
  
 
-int l;
 
-void max_num(int arr[])
+
+int max_num(int arr[],int size)
 {
-    int l,index_l;
-
+    int l;
     if (arr[0]>arr[1])
     {
         l=arr[0];
@@ -17,91 +16,78 @@ void max_num(int arr[])
         l=arr[1];
     }
 
-    for (int j = 2; j < 5; j++)
+    for (int j = 2; j < size; j++)
     {
         if (arr[j]>l)
         {
             l=arr[j];
-            index_l=j;
         }
     }
-    cout<<"l="<<l<<endl;
+    // cout<<"l="<<l<<endl;
+    return l;
 }
 
-
-void min_num(int arr[])
+int min_num(int arr[],int size,int l, int index_s)
 {
-    int s,index_s;
-
-    if (arr[0]==0 && arr[1]==0)
+    int s;
+    for (int i = 0; i < size; i++)
     {
-        s=l;
-
-        for (int i = 2; i < 5; i++)
+        if ((arr[i]<=l)&&(arr[i]!=0))
         {
-            if ((arr[i]<s)&&(arr[i]!=0))
-            {
-                s=arr[i];
-                index_s=i;
-            }
+            s=arr[i];
+            index_s=i;
         }
     }
-
-    else if (arr[0]==0 || arr[1]==0)
-    {
-        if (arr[0] !=0)
-        {
-            s=arr[0];
-
-            for (int i = 1; i < 5; i++)
-            {
-                if ((arr[i]<s)&&(arr[i]!=0))
-                {
-                    s=arr[i];
-                    index_s=i;
-                }
-            }
-        }                                                  
-        
-    }
-    else if (arr[0]!=0 && arr[1]!=0)
-    {
-        if ((arr[0]<arr[1]))
-        {
-            s=arr[0];
-        }
-        else
-        {
-            s=arr[1];                     
-        }
-
-        for (int i = 1; i < 5; i++)
-        {
-            if ((arr[i]<s)&&(arr[i]!=0))
-            {
-                s=arr[i];
-                index_s=i;
-            }
-        }
-    }
-    
     cout<<"s="<<s<<endl;
+    return 0;
+}
+
+void print_array(int arr[],int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        cout<<arr[i]<<" ";
+    }   
+    cout<<endl;
+}
+
+int modulus_q(int l,int s)
+{
+    return l%s;
+    // int m=l%s;
+    // cout<<"Modulus="<<m;
 }
 
 int main()
 {
-    int arr[5]={2,18,1,0,15};
+    int l, s, m, index_s;
+    int size;
+    cout<<"Numberof Elements: ";
+    cin>>size;
+    int arr[size];
 
+    for (int i = 1; i < size+1; i++)
+    {
+        cout<<"Enter element "<<i<<": ";
+        cin>>arr[i-1];
+    }
 
-    // Greater
-
-    max_num(arr);
-    min_num(arr);
-
-    //Small
-
+    cout<<"you entered array: ";
+    print_array(arr,size);
     
-
+    cout<<endl;
  
+    for (int i = 0; i < size; i++)
+    {
+        max_num(arr,size);
+        min_num(arr,size,l, index_s);
+        modulus_q(l,s);
+        cout<<endl;
+        arr[index_s]=0;
+        cout<<"Current Array:";
+        print_array(arr,size);
+        cout<<endl;
+    }
+
  return 0;
 }
