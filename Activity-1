@@ -1,18 +1,18 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
- 
 
-int l, s, m, index_s;
-
-void max_num(int arr[],int size)
+void max_min(int arr[], int size, int &l, int &s, int &index_s, int &index_l)
 {
+    // Find the maximum
     if (arr[0]>arr[1])
     {
         l=arr[0];
+        index_l=0;
     }
     else
     {
         l=arr[1];
+        index_l=1;
     }
 
     for (int j = 2; j < size; j++)
@@ -20,69 +20,83 @@ void max_num(int arr[],int size)
         if (arr[j]>l)
         {
             l=arr[j];
+            index_l=j;
         }
     }
-    cout<<"l="<<l<<endl;
-}
 
-void min_num(int arr[],int size)
-{
-    s=l;
+    // Find the smallest non-zero element
+    s = l;
     for (int i = 0; i < size; i++)
     {
-        if ((arr[i]<=s)&&(arr[i]!=0))
+        if (arr[i] < s && arr[i] != 0)
         {
-            s=arr[i];
-            index_s=i;
+            s = arr[i];
+            index_s = i;
         }
     }
-    cout<<"s="<<s<<endl;
+
+    cout << "l = " << l;
+    cout << ", s = " << s << endl;
 }
 
-void print_array(int arr[],int size)
+void print_array(int arr[], int size)
 {
     for (int i = 0; i < size; i++)
     {
-        cout<<arr[i]<<" ";
-    }   
-    cout<<endl;
+        cout << arr[i] << " ";
+    }
+    cout << endl;
 }
 
-void modulus_q()
+void modulus_q(int l, int s)
 {
-    m=l%s;
-    cout<<"Modulus="<<m;
+    int m = l % s;
+    cout << "Modulus = " << m << endl;
 }
 
 int main()
 {
-    int size;
-    cout<<"Numberof Elements: ";
-    cin>>size;
+    int l, s, index_s, index_l,size;
+    int count=0;
+
+    cout << "Number of Elements: ";
+    cin >> size;
+
     int arr[size];
-
-    for (int i = 1; i < size+1; i++)
-    {
-        cout<<"Enter element "<<i<<": ";
-        cin>>arr[i-1];
-    }
-
-    cout<<"you entered array: ";
-    print_array(arr,size);
-    
-    cout<<endl;
- 
     for (int i = 0; i < size; i++)
     {
-        max_num(arr,size);
-        min_num(arr,size);
-        modulus_q();
-        cout<<endl;
-        arr[index_s]=0;
-        cout<<"Current Array:";
-        print_array(arr,size);
-        cout<<endl;
+        cout << "Enter element " << i + 1 << ": ";
+        cin >> arr[i];
     }
 
- return 0;
+    cout << "You entered array: ";
+    print_array(arr, size);
+    cout << endl;
+
+    for (int i = 0; i < size; i++)
+    {
+        if (arr[i]>0)
+        {
+            count++;
+        }  
+    }
+    
+
+    for (int i = 0; i < count-1 ; i++) 
+    {
+        max_min(arr, size, l, s, index_s, index_l);
+        modulus_q(l, s);
+        arr[index_s] = 0; 
+        cout << "Current Array: ";
+        print_array(arr, size);
+        cout << endl;
+    }
+
+    arr[index_l] = 0; 
+    max_min(arr, size, l, s, index_s, index_l);
+    cout << "Current Array: ";
+    print_array(arr, size);
+
+    cout << "done";
+    return 0;
 }
