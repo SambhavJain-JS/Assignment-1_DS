@@ -11,7 +11,7 @@ struct Node {
 int main() {
     cout << "Circular Linked List Program Started" << endl;
 
-    int n;
+    int n, delete_element;
     string studentName;
 
     Node *head = NULL, *tail = NULL, *current;
@@ -25,7 +25,6 @@ int main() {
         cin >> studentName;
 
         current = new Node;
-
         current->name = studentName;
         current->next = NULL;
 
@@ -40,30 +39,37 @@ int main() {
         }
     }
 
-    // Displaying the circular linked list
-    cout << "Student Names in Circular Linked List:" << endl;
+    cout << "Enter the value of delete_element (1 to " << n << "): ";
+    cin >> delete_element;
+
+    // Process to remove every delete_element-th node
     current = head;
-    if (head != NULL) {
-        do {
-            cout << "---> " << current->name << endl;
+    Node *prev = tail; // Keep track of the previous node
+
+    while (n > 1) { // Continue until one node is left
+        for (int count = 1; count < delete_element; count++) {
+            prev = current;
             current = current->next;
-        } while (current != head);
+        }
+
+        // Remove the current node
+        cout << "Removing: " << current->name << endl;
+        prev->next = current->next;
+
+        // If deleting head node, update head
+        if (current == head) {
+            head = current->next;
+        }
+
+        delete current;
+        current = prev->next; // Move to the next node
+        n--;
     }
 
-    // Memory Deallocation
-    if (head != NULL) {
-        Node *temp;
-        do {
-            temp = head;
-            head = head->next;
-            delete temp;
-        } while (head != tail->next); // Delete until the last node points to head
-    }
+    // Display the last remaining node
+    cout << "Last remaining student: " << head->name << endl;
 
-    int delete_element;
-    cout<<"Enter Number between 1 to "<< n <<": ";
-    cin>>delete_element;
-
-    
+    // Cleanup
+    delete head;
     return 0;
 }
